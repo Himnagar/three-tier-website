@@ -1,78 +1,889 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-    <title>Three Tier Application</title>
 
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            margin-top: 100px;
-            background: #f4f4f4;
-        }
+<meta charset="UTF-8">
 
-        .container {
-            background: white;
-            width: 500px;
-            margin: auto;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
-        }
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-        button {
-            padding: 12px 25px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+<title>DevOps Academy</title>
 
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-    </style>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #0f172a;
+
+    color: #e2e8f0;
+
+}
+
+
+/* NAVBAR */
+
+nav {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 18px 8%;
+
+    background: #111827;
+
+    border-bottom: 1px solid #334155;
+
+}
+
+.logo {
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    color: #38bdf8;
+
+}
+
+
+nav button {
+
+    width: auto;
+
+    margin-left: 8px;
+
+}
+
+
+/* HERO */
+
+.hero {
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+}
+
+.hero h1 {
+
+    font-size: 48px;
+
+    margin-bottom: 15px;
+
+}
+
+.hero span {
+
+    color: #38bdf8;
+
+}
+
+.hero p {
+
+    color: #94a3b8;
+
+    font-size: 18px;
+
+}
+
+
+/* BUTTON */
+
+button {
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 12px 20px;
+
+    background: #0284c7;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+button:hover {
+
+    background: #0369a1;
+
+}
+
+
+/* COURSES */
+
+.container {
+
+    width: 90%;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+}
+
+.courses {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 20px;
+
+    margin-top: 30px;
+
+    margin-bottom: 80px;
+
+}
+
+
+.card {
+
+    background: #1e293b;
+
+    border: 1px solid #334155;
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+}
+
+
+.card h3 {
+
+    color: white;
+
+}
+
+
+.level {
+
+    color: #38bdf8;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+
+/* MODAL */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(0,0,0,.75);
+
+}
+
+
+.modal-box {
+
+    width: 400px;
+
+    max-width: 90%;
+
+    background: #1e293b;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    position: relative;
+
+}
+
+
+.close {
+
+    position: absolute;
+
+    right: 20px;
+
+    top: 10px;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+}
+
+
+input {
+
+    width: 100%;
+
+    padding: 13px;
+
+    margin: 8px 0;
+
+    border-radius: 8px;
+
+    border: 1px solid #475569;
+
+    background: #0f172a;
+
+    color: white;
+
+}
+
+
+.form-button {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+}
+
+
+.switch {
+
+    text-align: center;
+
+    margin-top: 18px;
+
+    color: #94a3b8;
+
+}
+
+
+.switch a {
+
+    color: #38bdf8;
+
+    cursor: pointer;
+
+}
+
+
+#message {
+
+    min-height: 22px;
+
+    color: #fb7185;
+
+}
+
+
+#dashboard {
+
+    display: none;
+
+    margin-bottom: 70px;
+
+}
+
+
+footer {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #64748b;
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<div class="container">
 
-    <h1>Three Tier Architecture</h1>
+<!-- NAVBAR -->
 
-    <p>Frontend → Backend → Database</p>
+<nav>
 
-    <button onclick="getData()">
-        Get Data
+    <div class="logo">
+
+        ⚡ DevOps Academy
+
+    </div>
+
+    <div>
+
+        <button onclick="openModal('login')">
+
+            Login
+
+        </button>
+
+        <button onclick="openModal('register')">
+
+            Register
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h1>
+
+        Learn
+
+        <span>DevOps</span>
+
+        the Practical Way
+
+    </h1>
+
+    <p>
+
+        Linux • Git • Docker • Kubernetes • CI/CD • Cloud
+
+    </p>
+
+    <button onclick="openModal('register')">
+
+        Start Learning
+
     </button>
 
-    <div id="result"></div>
+</section>
+
+
+
+<!-- COURSES -->
+
+<section class="container">
+
+    <h2>DevOps Courses</h2>
+
+    <div id="courses" class="courses"></div>
+
+</section>
+
+
+
+<!-- DASHBOARD -->
+
+<section
+    id="dashboard"
+    class="container"
+>
+
+    <div class="card">
+
+        <h2>
+
+            Welcome,
+
+            <span id="userName"></span>
+
+            👋
+
+        </h2>
+
+        <p>
+
+            You are successfully logged in.
+
+        </p>
+
+        <button onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<footer>
+
+    DevOps Academy
+
+</footer>
+
+
+
+<!-- AUTH MODAL -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-box">
+
+        <div
+            class="close"
+            onclick="closeModal()"
+        >
+            ×
+        </div>
+
+
+        <h2 id="modalTitle">
+
+            Login
+
+        </h2>
+
+
+        <div id="message"></div>
+
+
+        <form id="authForm">
+
+
+            <div id="nameField"
+                 style="display:none">
+
+                <input
+                    id="name"
+                    type="text"
+                    placeholder="Full Name"
+                >
+
+            </div>
+
+
+            <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                required
+            >
+
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                minlength="8"
+                required
+            >
+
+
+            <button
+                class="form-button"
+                type="submit"
+                id="submitButton"
+            >
+
+                Login
+
+            </button>
+
+
+        </form>
+
+
+        <div class="switch">
+
+            <span id="switchText">
+
+                Don't have an account?
+
+            </span>
+
+            <a onclick="toggleMode()">
+
+                Register
+
+            </a>
+
+        </div>
+
+
+    </div>
 
 </div>
 
+
+
 <script>
 
-async function getData() {
+
+let mode = "login";
+
+
+// ===============================
+// LOAD COURSES
+// ===============================
+
+async function loadCourses() {
 
     try {
 
-        const response = await fetch('/api/users');
+        const response =
+            await fetch("/api/courses");
 
-        const data = await response.json();
+        const courses =
+            await response.json();
 
-        document.getElementById("result").innerHTML =
-            "Message: " + data.message +
-            "<br>User: " + data.user;
+
+        document.getElementById("courses")
+            .innerHTML = courses.map(course => `
+
+                <div class="card">
+
+                    <div class="level">
+
+                        ${escapeHtml(course.level)}
+
+                    </div>
+
+                    <h3>
+
+                        ${escapeHtml(course.title)}
+
+                    </h3>
+
+                    <p>
+
+                        ${escapeHtml(course.description)}
+
+                    </p>
+
+                </div>
+
+            `).join("");
+
 
     } catch (error) {
 
-        document.getElementById("result").innerHTML =
-            "Error connecting to backend";
+        document.getElementById("courses")
+            .innerHTML =
+            "<p>Unable to load courses.</p>";
 
     }
 
 }
 
+
+// ===============================
+// SECURITY HELPER
+// ===============================
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+// ===============================
+// OPEN MODAL
+// ===============================
+
+function openModal(selectedMode) {
+
+    mode = selectedMode;
+
+    updateModal();
+
+    document.getElementById("modal")
+        .style.display = "flex";
+
+}
+
+
+// ===============================
+// CLOSE MODAL
+// ===============================
+
+function closeModal() {
+
+    document.getElementById("modal")
+        .style.display = "none";
+
+    document.getElementById("message")
+        .textContent = "";
+
+    document.getElementById("authForm")
+        .reset();
+
+}
+
+
+// ===============================
+// SWITCH LOGIN / REGISTER
+// ===============================
+
+function toggleMode() {
+
+    mode =
+        mode === "login"
+            ? "register"
+            : "login";
+
+    updateModal();
+
+}
+
+
+function updateModal() {
+
+    const register =
+        mode === "register";
+
+
+    document.getElementById("modalTitle")
+        .textContent =
+        register
+            ? "Create Account"
+            : "Login";
+
+
+    document.getElementById("submitButton")
+        .textContent =
+        register
+            ? "Register"
+            : "Login";
+
+
+    document.getElementById("nameField")
+        .style.display =
+        register
+            ? "block"
+            : "none";
+
+
+    document.getElementById("switchText")
+        .textContent =
+        register
+            ? "Already have an account?"
+            : "Don't have an account?";
+
+
+    document.querySelector(".switch a")
+        .textContent =
+        register
+            ? "Login"
+            : "Register";
+
+
+    document.getElementById("message")
+        .textContent = "";
+
+}
+
+
+// ===============================
+// LOGIN / REGISTER
+// ===============================
+
+document.getElementById("authForm")
+.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+
+    const payload = {
+
+        name:
+            document.getElementById("name")
+                .value,
+
+        email:
+            document.getElementById("email")
+                .value,
+
+        password:
+            document.getElementById("password")
+                .value
+
+    };
+
+
+    const endpoint =
+        mode === "register"
+
+            ? "/api/auth/register"
+
+            : "/api/auth/login";
+
+
+    try {
+
+        const response =
+            await fetch(endpoint, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(payload)
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            document.getElementById("message")
+                .textContent =
+                data.message;
+
+            return;
+
+        }
+
+
+        // Save JWT
+
+        localStorage.setItem(
+            "token",
+            data.token
+        );
+
+
+        closeModal();
+
+
+        await loadProfile();
+
+
+        alert(data.message);
+
+
+    } catch (error) {
+
+        document.getElementById("message")
+            .textContent =
+            "Unable to connect to backend.";
+
+    }
+
+});
+
+
+// ===============================
+// LOAD USER PROFILE
+// ===============================
+
+async function loadProfile() {
+
+    const token =
+        localStorage.getItem("token");
+
+
+    if (!token) {
+
+        return;
+
+    }
+
+
+    const response =
+        await fetch("/api/me", {
+
+            headers: {
+
+                Authorization:
+                    `Bearer ${token}`
+
+            }
+
+        });
+
+
+    if (response.ok) {
+
+        const user =
+            await response.json();
+
+
+        document.getElementById("userName")
+            .textContent =
+            user.name;
+
+
+        document.getElementById("dashboard")
+            .style.display =
+            "block";
+
+
+    } else {
+
+        localStorage.removeItem("token");
+
+    }
+
+}
+
+
+// ===============================
+// LOGOUT
+// ===============================
+
+function logout() {
+
+    localStorage.removeItem("token");
+
+    document.getElementById("dashboard")
+        .style.display =
+        "none";
+
+}
+
+
+// ===============================
+// INITIAL LOAD
+// ===============================
+
+loadCourses();
+
+loadProfile();
+
+
 </script>
 
+
 </body>
+
 </html>
