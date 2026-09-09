@@ -1,45 +1,36 @@
 services:
 
   frontend:
-
     build: ./frontend
-
     ports:
       - "8080:80"
-
     depends_on:
       - backend
 
-
   backend:
-
     build: ./backend
-
-    expose:
-      - "5000"
-
-    depends_on:
-      - database
-
-
-  database:
-
-    image: mysql:8.0
-
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: appdb
-      MYSQL_USER: appuser
-      MYSQL_PASSWORD: apppassword
+      PORT: 3000
+      DATABASE_URL: postgresql://devops_user:devops_password@db:5432/devops_learning
+      JWT_SECRET: my-super-secret-jwt-key
+    depends_on:
+      db:
+        condition: service_healthy
 
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: devops_learning
+      POSTGRES_USER: devops_user
+      POSTGRES_PASSWORD: devops_password
     volumes:
-      - mysql-data:/var/lib/mysql
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-
-    expose:
-      - "3306"
-
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U devops_user -d devops_learning"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
 volumes:
-
-  mysql-data:
+  postgres_data:
